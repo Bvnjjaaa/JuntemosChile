@@ -1,30 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
+import { ApiConfigService } from '../api-config/api-config.service'; // Asegúrate de importar correctamente
+import { HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Usuarios } from '../../models/Usuarios'; // Asegúrate de tener el modelo definido
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  constructor(private apiConfigService: ApiConfigService) {}
 
-  private usuarios: Usuario[] = [
-    { username: 'admin', password: 'admin123', role: 'administrador' },
-    { username: 'coord', password: 'coord123', role: 'coordinador' },
-    { username: 'ciuda', password: 'ciuda123', role: 'ciudadano' },
-    { username: 'volun', password: 'volun123', role: 'voluntario' }
-  ];
-
-  constructor() { }
-
-  validar_usuario(userLogin: Usuario): boolean {
-    return this.usuarios.some(usuario =>
-      usuario.username === userLogin.username && usuario.password === userLogin.password
-    );
-  }
-
-  getUsuarioRole(userLogin: Usuario): string | null {
-    const usuario = this.usuarios.find(usuario =>
-      usuario.username === userLogin.username && usuario.password === userLogin.password
-    );
-    return usuario ? usuario.role : null;
+  autenticar(usuario: string, contrasena: string): Observable<HttpResponse<Usuarios>> {
+    const body = { usuario, contrasena };
+    return this.apiConfigService.post<Usuarios>('/auth/login', body);
   }
 }
+
+
+

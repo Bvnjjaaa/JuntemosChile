@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/api/users/users.service';
-import { Usuario } from 'src/app/models/usuario';
+import { UsersService } from '../../api/users/users.service'; // Cambia la ruta según corresponda
+import { Usuarios } from '../../models/Usuarios';
 
 @Component({
   selector: 'app-login',
@@ -9,29 +9,26 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  usuario: string = '';
+  contrasena: string = '';
 
-  username: string = '';
-  password: string = '';
-
-  constructor(private _usersLogin: UsersService, private router: Router) { }
+  constructor(private _usersLogin: UsersService, private router: Router) {}
 
   login() {
-    const userLogin: Usuario = { username: this.username, password: this.password, role: 'administrador' };
-
-    if (this._usersLogin.validar_usuario(userLogin)) {
-      // Obtener el rol del usuario
-      const role = this._usersLogin.getUsuarioRole(userLogin);
-      console.info(`Iniciaste sesión como ${role}`);
-
-      // Redirige a la página de productos si el login es exitoso
-      this.router.navigate(['home'], {
-        state: {
-          userInfo: userLogin
+    this._usersLogin.autenticar(this.usuario, this.contrasena).subscribe(
+      (response) => {
+        // Asegúrate de que response sea de tipo HttpResponse<Usuarios>
+        if (response.status === 200) {
+          const user: Usuarios = response.body as Usuarios; // Asegúrate de que el tipo sea correcto
+          console.log('Login exitoso', user);
+          // Aquí puedes navegar a la página de inicio o hacer lo que necesites
+          this.router.navigate(['/home']);
         }
-      });
-    } else {
-      // Muestra un mensaje de error si las credenciales son incorrectas
-      console.info('Error, usuario no existe');
-    }
+      },
+      (error) => {
+        console.error('Error de login', error);
+        // Manejo del error (puedes mostrar un mensaje al usuario)
+      }
+    );
   }
 }
