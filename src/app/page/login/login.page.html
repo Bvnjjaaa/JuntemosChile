@@ -19,8 +19,11 @@
       
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="contrasena" name="contrasena" required></ion-input>
+        <ion-input type="password" [(ngModel)]="contrasena" name="contrasena" required>
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
       </ion-item>
+      
       
       <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
     </form>

@@ -1,5 +1,4 @@
 <ion-content>
-  <!-- Título centrado -->
   <div class="title-container">
     <h1 class="app-title">JuntemosChile</h1>
   </div>
@@ -7,20 +6,27 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let reporte of reportes">
-        <ion-card>
+        <ion-card class="form">
           <ion-card-header>
             <ion-card-title>{{ reporte.titulo }}</ion-card-title>
           </ion-card-header>
-  
-  
           <ion-card-content>
-          <p>{{ reporte.descripcion }}</p>
-          <p>Creado el: {{ reporte.fecha_creacion }}</p>
-          <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
-          <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
+            <p>{{ reporte.descripcion }}</p>
+            <p>Creado el: {{ reporte.fecha_creacion }}</p>
+            <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
+            <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-  </ion-content>
+
+  <div class="formulario" *ngIf="mostrarFormulario">
+    <ion-input [(ngModel)]="nuevoReporte.titulo" placeholder="Título"></ion-input>
+    <ion-input [(ngModel)]="nuevoReporte.descripcion" placeholder="Descripción"></ion-input>
+    <ion-button color="danger" (click)="crearReportes()">Crear</ion-button>
+    <ion-button color="danger" (click)="toggleFormulario()">Cancelar</ion-button>
+  </div>
+
+  <ion-button class="boton-cuadrado" (click)="toggleFormulario()">Crear Reporte</ion-button> 
+</ion-content>
