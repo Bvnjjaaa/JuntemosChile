@@ -1,25 +1,37 @@
+<!-- src/app/home/home.page.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Reportes</ion-title>
+    <ion-button type="submit">cerrarSesion</ion-button>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <!-- Título centrado -->
-  <div class="title-container">
-    <h1 class="app-title">JuntemosChile</h1>
+  <div *ngIf="rol === 'admin'">
+    <h1>Bienvenido, Admin</h1>
+    <!-- Contenido del admin -->
   </div>
+  <div *ngIf="rol === 'usuario'">
+    <h1>Bienvenido, Usuario</h1>
+    <!-- Contenido del usuario -->
+  </div>
+  <div *ngIf="rol === 'invitado'">
+    <h1>Bienvenido, Invitado</h1>
+    <!-- Contenido del invitado -->
+  </div>
+</ion-content>
 
-  <!-- Grilla de reportes -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let reporte of reportes">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ reporte.usuario }}</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            <p><strong>Reporte:</strong> {{ reporte.contexto }}</p>
-            <p><strong>Región:</strong> {{ reporte.region }}</p>
-            <p><strong>Comuna:</strong> {{ reporte.comuna }}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let reporte of reportes">
+      <ion-label>
+        <h2>{{ reporte.titulo }}</h2>
+        <p>{{ reporte.descripcion }}</p>
+        <p>Creado el: {{ reporte.fecha_creacion }}</p>
+        <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
+        <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

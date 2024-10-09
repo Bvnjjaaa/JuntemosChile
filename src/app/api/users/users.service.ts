@@ -1,30 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
+import { ApiConfigService } from '../api-config/api-config.service'; // Asegúrate de importar correctamente
+import { HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Usuarios } from 'src/app/models/Usuarios'; // Asegúrate de tener el modelo definido
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  constructor(private apiConfigService: ApiConfigService, private router: Router) {}
 
-  private usuarios: Usuario[] = [
-    { username: 'admin', password: 'admin123', role: 'administrador' },
-    { username: 'coord', password: 'coord123', role: 'coordinador' },
-    { username: 'ciuda', password: 'ciuda123', role: 'ciudadano' },
-    { username: 'volun', password: 'volun123', role: 'voluntario' }
-  ];
-
-  constructor() { }
-
-  validar_usuario(userLogin: Usuario): boolean {
-    return this.usuarios.some(usuario =>
-      usuario.username === userLogin.username && usuario.password === userLogin.password
-    );
+  registrarUsuario(usuario: string, correo: string, contrasena: string): Observable<HttpResponse<Usuarios>> {
+    const body = { usuario, correo, contrasena };
+    return this.apiConfigService.post<Usuarios>('/auth/login', body)
   }
 
-  getUsuarioRole(userLogin: Usuario): string | null {
-    const usuario = this.usuarios.find(usuario =>
-      usuario.username === userLogin.username && usuario.password === userLogin.password
-    );
-    return usuario ? usuario.role : null;
+  autenticar(usuario: string, contrasena: string): Observable<HttpResponse<Usuarios>> {
+    const body = { usuario, contrasena };
+    return this.apiConfigService.post<Usuarios>('/auth/login', body);
   }
+// Método para cerrar sesión
+  cerrarSesion(usuario: string): void {
+  // Cuerpo de la solicitud para cerrar sesión
+    const body = { activo: false }; // Supón que 'activo' es el campo que marca si el usuario está conectado
+
+  // Enviar una solicitud para actualizar el estado del usuario en la tabla 'usuarios'
+    this.apiConfigService.put(`/usuarios/${usuario}`, body).subscribe(
+      (HttpResponse) => {
+        console.log('Sesión cerrada exitosamente', HttpResponse);
+        // Eliminar cualquier información del usuario almacenada localmente
+        localStorage.removeItem('usuarios'); // Elimina el ID del usuario de localStorage si es necesario
+        this.router.navigate(['/login']); // Redirigir a la página de inicio de sesión
+      },
+      (error) => {
+        console.error('Error al cerrar sesión:', error);
+      }
+  );
 }
+}
+
+
+
