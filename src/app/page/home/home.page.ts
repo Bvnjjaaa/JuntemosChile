@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../api/reportes/reportes.service';
 import { Reportes } from '../../models/Reportes';
 import { CrearReportes } from '../../models/CrearReportes';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -40,32 +41,26 @@ export class HomePage implements OnInit {
   }
 
   // Método para crear un nuevo reporte en Supabase
-  crearReportes() {
-  if (this.nuevoReporte.titulo.trim() && this.nuevoReporte.descripcion.trim()) {
-    this.reportesService.agregarReportes(this.nuevoReporte).subscribe(
-      (response) => {
-        console.log('Respuesta completa:', response); // Agrega esta línea
-        if (response.body) {
-          this.reportes.push(response.body);  // Añadir el nuevo reporte a la lista
-        } else {
-          console.warn('No se recibió un body en la respuesta.');
-          console.log('Reporte creado exitosamente:', response.body);
-          this.nuevoReporte = { titulo: '', descripcion: '' };  // Limpiar el formulario
-          this.mostrarFormulario = false;  // Ocultar el formulario después de crear el reporte
-          this.cargarReportes();  // Recargar la lista de reportes
-        }
-      },
-      (error) => {
-        console.error('Error al crear el reporte:', error);
-        if (error.error) {
-          console.error('Detalles del error:', error.error);
-        }
+  async crearReportes() {
+    try {
+      const response = await firstValueFrom(this.reportesService.agregarReportes(this.nuevoReporte));
+  
+      if (response.body) {  // Verificar si `response.body` no es nulo
+        this.reportes.push(response.body);  // Añadir el reporte a la lista
+      } else {
+        console.warn('No se recibió un body válido en la respuesta.');
       }
-    );
-  } else {
-    console.warn('El título y la descripción son obligatorios.');
+  
+      this.nuevoReporte = { titulo: '', descripcion: '' };  // Limpiar el formulario
+    } catch (error) {
+      console.error('Error al crear el reporte:', error);
+    }
   }
-}
+  
+  
+  
+  
+  
 
   
   // Método para alternar la visibilidad del formulario
