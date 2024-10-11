@@ -22,6 +22,6 @@ export class ReportesService {
   // Método para agregar nuevos reportes
   agregarReportes(nuevoReporte: CrearReportes): Observable<HttpResponse<Reportes>> {
     return this.apiConfigService.post(this.endpoint, nuevoReporte);
-  }
+  }  
 }
 
