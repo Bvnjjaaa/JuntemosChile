@@ -37,9 +37,5 @@ export class ApiConfigService {
     return this.http.post<T>(`${this.baseUrl}/${path}`, body, { headers: this.getHeaders(), observe: 'response' })
       .pipe(catchError(this.handleError));
   }
-  
-  put<T>(url: string, body: any): Observable<HttpResponse<T>> {
-    return this.http.put<T>(`${this.baseUrl}${url}`, body, { observe: 'response' });
-  }
 }
 

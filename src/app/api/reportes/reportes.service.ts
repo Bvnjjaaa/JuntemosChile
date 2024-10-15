@@ -1,10 +1,9 @@
-// src/app/service/reportes/reportes.service.ts
-
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from '../api-config/api-config.service';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { Reportes } from 'src/app/models/Reportes';
+import { Reportes } from '../../models/Reportes';
+import { CrearReportes } from 'src/app/models/CrearRepostes';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +18,10 @@ export class ReportesService {
   obtenerReportes(): Observable<HttpResponse<Reportes[]>> {
     return this.apiConfigService.get<Reportes[]>(this.endpoint);
   }
+
+  // Método para agregar nuevos reportes
+  agregarReportes(nuevoReporte: CrearReportes): Observable<HttpResponse<Reportes>> {
+    return this.apiConfigService.post(this.endpoint, nuevoReporte);
+  }
 }
+

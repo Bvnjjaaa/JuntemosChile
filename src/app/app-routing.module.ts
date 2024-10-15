@@ -14,9 +14,14 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'register',
-    loadChildren: () => import('./page/register/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
   },
 
 ];
