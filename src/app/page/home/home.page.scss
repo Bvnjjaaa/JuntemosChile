@@ -1,5 +1,8 @@
 ion-content {
-  --background: blue; /* Color de fondo claro */
+  --background: #0a2574; /* Color de fondo claro */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 100px; /* Espacio para el botón */
 }
 
 .title-container {
@@ -11,19 +14,19 @@ ion-content {
 .app-title {
   font-size: 32px;
   font-weight: bold;
-  color: white; /* Color azul como en el login */
+  color: rgb(255, 255, 255); /* Color azul como en el login */
   text-align: center;
   margin-bottom: 20px;
 }
 
 /* Estilos para las tarjetas de reportes */
 ion-card {
-  --background: white;
+  --background: rgb(255, 255, 255);
   --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
 }
 
 ion-card-header {
-  --color: #d52b1e; /* Título del reporte en rojo */
+  --color: #6e6d6d; /* Título del reporte en rojo */
 }
 
 ion-card-title {
@@ -33,4 +36,35 @@ ion-card-title {
 ion-card-content p {
   font-size: 16px;
   color: black; /* Texto de los detalles del reporte en azul */
+}
+
+/* Estilo para el botón cuadrado centrado */
+.boton-cuadrado {
+  width: 100px; /* Ajusta el tamaño según sea necesario */
+  height: 100px; /* Asegúrate de que sea cuadrado */
+  margin: 0 auto; /* Centra horizontalmente */
+  display: flex; /* Para centrar el contenido del botón */
+  justify-content: center; /* Centra el contenido en el botón */
+  align-items: center; /* Centra el contenido verticalmente */
+  position: fixed; /* Fija el botón */
+  bottom: 20px; /* Espacio desde el fondo */
+  left: 50%; /* Alinea al centro horizontalmente */
+  transform: translateX(-50%); /* Ajusta para centrar el botón */
+}
+
+.formulario{
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 5%;
+  border-radius: 6px;
+  padding: 18px;
+}
+
+.formulario ion-input{
+  color: black;
+}
+
+.red-button {
+  background-color: #d52b1e; /* Rojo */
+  color: white; /* Texto en blanco */
 }

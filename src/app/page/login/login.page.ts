@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/api/users/users.service';
-import { Usuario } from 'src/app/models/usuario';
+import { LoginService } from '../../api/login/login.service';
+import { ToastController } from '@ionic/angular'; // Importar ToastController
 
 @Component({
   selector: 'app-login',
@@ -9,29 +9,47 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  usuario: string = ''; // Campo para el nombre de usuario
+  contrasena: string = ''; // Campo para la contraseña
 
-  username: string = '';
-  password: string = '';
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private toastController: ToastController // Inyectar ToastController
+  ) {}
 
-  constructor(private _usersLogin: UsersService, private router: Router) { }
-
+  // Método para iniciar sesión
   login() {
-    const userLogin: Usuario = { username: this.username, password: this.password, role: 'administrador' };
-
-    if (this._usersLogin.validar_usuario(userLogin)) {
-      // Obtener el rol del usuario
-      const role = this._usersLogin.getUsuarioRole(userLogin);
-      console.info(`Iniciaste sesión como ${role}`);
-
-      // Redirige a la página de productos si el login es exitoso
-      this.router.navigate(['home'], {
-        state: {
-          userInfo: userLogin
+    this.loginService.validateUser(this.usuario, this.contrasena).subscribe(
+      async (response) => {
+        if (response.body && response.body.length > 0) {
+          console.log('Inicio de sesión exitoso', response.body[0]);
+          await this.presentToast('Iniciaste sesion correctamente','success');
+          // Redirigir al dashboard o a la página principal
+          this.router.navigate(['/home']); // Ajusta la ruta según la página de destino
+        } else {
+          // Mostrar notificación de credenciales incorrectas
+          await this.presentToast('Usuario o contraseña incorrectos', 'danger');
         }
-      });
-    } else {
-      // Muestra un mensaje de error si las credenciales son incorrectas
-      console.info('Error, usuario no existe');
-    }
+      },
+      async (error) => {
+        console.error('Error al iniciar sesión:', error);
+        await this.presentToast('Hubo un problema al iniciar sesión. Inténtalo de nuevo.','danger');
+      }
+    );
+  }
+
+  // Método para mostrar un Toast con el mensaje proporcionado
+  async presentToast(message: string, color: string = 'danger') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'top',
+      color: color, // Puedes cambiar este valor para ajustar el color del toast
+    });
+    toast.present();
   }
 }
+
+
+
