@@ -15,6 +15,10 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+  {
+    path: 'bandeja-entrada',
+    loadChildren: () => import('./bandeja-entrada/bandeja-entrada.module').then( m => m.BandejaEntradaPageModule)
+  },
 ];
 
 @NgModule({
