@@ -12,17 +12,14 @@ export class LoginService {
 
   constructor(private apiService: ApiConfigService) {}
 
-  /**
-   * Método para validar usuario y contraseña
-   * @param usuario Nombre de usuario
-   * @param contrasena Contraseña
-   * @returns Observable con la respuesta de la consulta
-   */
-  validateUser(usuario: string, contrasena: string): Observable<HttpResponse<any>> {
-    // Construcción de la ruta con parámetros de filtro en Supabase
-    const path = `${this.tableName}?usuario=eq.${usuario}&contrasena=eq.${contrasena}`;
 
+
+  validateUser(usuario: string, contrasena: string): Observable<HttpResponse<any>> {
+    // Modificar la consulta para incluir el nombre del rol usando un JOIN
+    const path = `${this.tableName}?usuario=eq.${usuario}&contrasena=eq.${contrasena}&select=*,roles(nombre)`;
+    
     // Realizar la consulta GET para validar las credenciales
     return this.apiService.get<any>(path);
   }
+
 }

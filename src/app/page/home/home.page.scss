@@ -10,8 +10,9 @@ ion-content {
 
 .title-container {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: space-between; /* Espacio entre el título y el botón */
+  align-items: center; /* Centra verticalmente */
+  padding: 20px; /* Añade espacio alrededor del contenedor */
 }
 
 .app-title {
@@ -20,6 +21,7 @@ ion-content {
   color: rgb(255, 255, 255); /* Color azul como en el login */
   text-align: center;
   margin-bottom: 20px;
+  margin-left: 2;
 }
 
 /* Estilos para las tarjetas de reportes */
@@ -28,9 +30,6 @@ ion-card {
   --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
 }
 
-ion-card-header {
-  --color: #6e6d6d; /* Título del reporte en rojo */
-}
 
 ion-card-title {
   color: #d52b1e; /* Color rojo para el nombre del usuario */
@@ -69,3 +68,17 @@ ion-card-content p {
   background-color: #d52b1e; /* Rojo */
   color: white; /* Texto en blanco */
 }
+
+.bandeja-button {
+  height: 40px; /* Ajusta la altura del botón para que sea cuadrado */
+  border-radius: 8px; /* Opcional: esquinas redondeadas */
+  display: flex;
+  justify-content: center; /* Centra el ícono horizontalmente */
+  align-items: center; /* Centra el ícono verticalmente */
+}
+
+.hidden-button {
+  visibility: hidden;
+}
+
+

@@ -9,4 +9,5 @@ export interface Reportes {
   coordinador_id: number;    // ID del coordinador asociado al reporte (de Usuarios)
   ciudadano: Usuarios;        // Usuario ciudadano relacionado (ahora es obligatorio)
   coordinador: Usuarios;      // Usuario coordinador relacionado (ahora es obligatorio)
+  estado: string;
 }

@@ -1,6 +1,12 @@
 <ion-content>
   <div class="title-container">
+    <ion-button class="bandeja-button" color="danger" (click)="cerrarSesion()" >
+      <ion-icon name="log-out"></ion-icon> 
+    </ion-button>
     <h1 class="app-title">JuntemosChile</h1>
+    <ion-button class="bandeja-button" color="danger" [ngClass]="{ 'hidden-button': rol !== 'Coordinador' }" (click)="buzonReportes()">
+      <ion-icon name="mail-outline"></ion-icon>
+    </ion-button>
   </div>
   
   <ion-grid>
@@ -21,6 +27,8 @@
     </ion-row>
   </ion-grid>
 
+  
+
   <div class="formulario" *ngIf="mostrarFormulario">
     <ion-input [(ngModel)]="nuevoReporte.titulo" placeholder="Título"></ion-input>
     <ion-input [(ngModel)]="nuevoReporte.descripcion" placeholder="Descripción"></ion-input>
@@ -28,5 +36,5 @@
     <ion-button color="danger" (click)="toggleFormulario()">Cancelar</ion-button>
   </div>
 
-  <ion-button class="boton-cuadrado" (click)="toggleFormulario()">Crear Reporte</ion-button> 
+  <ion-button color="danger" class="boton-cuadrado" [ngClass]="{ 'hidden-button': rol !== 'Ciudadano' }" (click)="toggleFormulario()">Crear Reporte</ion-button> 
 </ion-content>

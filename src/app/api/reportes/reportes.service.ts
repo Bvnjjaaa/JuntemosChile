@@ -22,6 +22,15 @@ export class ReportesService {
   // Método para agregar nuevos reportes
   agregarReportes(nuevoReporte: CrearReportes): Observable<HttpResponse<Reportes>> {
     return this.apiConfigService.post(this.endpoint, nuevoReporte);
-  }  
+  }
+
+  // reportes.service.ts
+  actualizarEstadoReporte(id_reporte: number, estado: string, coordinador_id: number): Observable<HttpResponse<Reportes>> {
+    const url = `${this.endpoint}?id_reporte=eq.${id_reporte}`; // Construimos la URL correcta
+    return this.apiConfigService.patch(url, { estado, coordinador_id }); // Enviamos el objeto de estado y coordinador_id
+  }
+
+
 }
+
 

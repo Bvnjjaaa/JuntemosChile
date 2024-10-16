@@ -14,7 +14,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },  {
+    path: 'solicitud-reportes',
+    loadChildren: () => import('./page/solicitud-reportes/solicitud-reportes.module').then( m => m.SolicitudReportesPageModule)
   },
+
 ];
 
 @NgModule({

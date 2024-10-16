@@ -22,14 +22,16 @@ export class LoginPage {
     this.loginService.validateUser(this.usuario, this.contrasena).subscribe(
       async (response) => {
         if (response.body && response.body.length > 0) {
-          console.log('Inicio de sesión exitoso', response.body[0]);
-          await this.presentToast('Iniciaste sesión correctamente', 'success');
-          // Almacenar el ID del usuario en localStorage
-          const id = response.body[0].id;
+          const usuario = response.body[0];
+          console.log('Inicio de sesión exitoso', usuario);
+          const nombreRol = usuario.roles.nombre;
+          const id = usuario.id;
           localStorage.setItem('id', id);
+          localStorage.setItem('rol', nombreRol); // Almacenar el rol
           // Redirigir al dashboard o a la página principal
           this.router.navigate(['/home']);
-          console.log(localStorage.getItem('id'));
+          console.log('Rol del usuario:', nombreRol); // Imprimir el rol
+          await this.presentToast('Iniciaste sesión correctamente', 'success');
         } else {
           await this.presentToast('Usuario o contraseña incorrectos', 'danger');
         }
@@ -40,6 +42,7 @@ export class LoginPage {
       }
     );
   }
+  
 
   async presentToast(message: string, color: string = 'danger') {
     const toast = await this.toastController.create({

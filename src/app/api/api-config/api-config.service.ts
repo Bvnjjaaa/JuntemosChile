@@ -16,7 +16,7 @@ export class ApiConfigService {
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'apiKey': environment.apiKey,
-      'Authorization': "Bearer "+environment.apiKey
+      'Authorization': "Bearer " + environment.apiKey
     });
   }
 
@@ -37,5 +37,12 @@ export class ApiConfigService {
     return this.http.post<T>(`${this.baseUrl}/${path}`, body, { headers: this.getHeaders(), observe: 'response' })
       .pipe(catchError(this.handleError));
   }
-}
 
+  // Método PATCH genérico
+  // api-config.service.ts
+  patch<T>(url: string, body: any): Observable<HttpResponse<T>> {
+    return this.http.patch<T>(`${this.baseUrl}/${url}`, body, { headers: this.getHeaders(), observe: 'response' })
+      .pipe(catchError(this.handleError));
+  }
+
+}
