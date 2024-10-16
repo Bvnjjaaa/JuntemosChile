@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../api/reportes/reportes.service';
 import { Reportes } from '../../models/Reportes';
 import { CrearReportes } from '../../models/CrearReportes';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +11,11 @@ import { firstValueFrom } from 'rxjs';
 export class HomePage implements OnInit {
   reportes: Reportes[] = [];
   
+
   nuevoReporte: CrearReportes = {
     titulo: '',
     descripcion: '',
-    ciudadano_id:''
+    ciudadano_id: ''
   };
 
   mostrarFormulario: boolean = false;
@@ -42,20 +42,28 @@ export class HomePage implements OnInit {
   crearReportes() {
     const { titulo, descripcion } = this.nuevoReporte;
     
+    // Validamos que título y descripción no estén vacíos
     if (titulo.trim() && descripcion.trim()) {
-      // Obtener el ID del usuario de localStorage
-      const ciudadano_id = localStorage.getItem('userId'); // Cambia 'id' por el nombre que usaste al almacenar
-
+      const ciudadano_id = localStorage.getItem('id');
+  
+      // Verificamos que ciudadano_id esté disponible
       if (ciudadano_id) {
-        this.nuevoReporte.ciudadano_id = ciudadano_id; 
+        this.nuevoReporte.ciudadano_id = ciudadano_id;
+      } else {
+        console.error('No se encontró el ID del ciudadano en localStorage');
+        return;
       }
-
+  
       this.reportesService.agregarReportes(this.nuevoReporte).subscribe(
         (response) => {
           if (response.body) {
             this.reportes.push(response.body);
+            console.log("hola");
           }
-          this.nuevoReporte = { titulo: '', descripcion: '', ciudadano_id: ''};
+          this.nuevoReporte = {
+            titulo: '',descripcion: '',ciudadano_id: ''
+          };
+          this.toggleFormulario();
           this.cargarReportes();
         },
         (error) => console.error('Error al crear el reporte:', error)
@@ -64,6 +72,7 @@ export class HomePage implements OnInit {
       console.warn('El título y la descripción son obligatorios.');
     }
   }
+  
 
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;

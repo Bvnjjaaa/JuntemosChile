@@ -29,6 +29,7 @@ export class LoginPage {
           localStorage.setItem('id', id);
           // Redirigir al dashboard o a la página principal
           this.router.navigate(['/home']);
+          console.log(localStorage.getItem('id'));
         } else {
           await this.presentToast('Usuario o contraseña incorrectos', 'danger');
         }

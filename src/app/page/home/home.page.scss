@@ -1,8 +1,11 @@
 ion-content {
-  --background: blue; /* Color de fondo claro */
+  --background: blue;
   display: flex;
   flex-direction: column;
-  padding-bottom: 100px; /* Espacio para el botón */
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 20px; /* Añadir espacio inferior para el botón */
+  min-height: 100vh; /* Para que el contenido ocupe toda la pantalla */
 }
 
 .title-container {
@@ -40,16 +43,14 @@ ion-card-content p {
 
 /* Estilo para el botón cuadrado centrado */
 .boton-cuadrado {
-  width: 100px; /* Ajusta el tamaño según sea necesario */
-  height: 100px; /* Asegúrate de que sea cuadrado */
-  margin: 0 auto; /* Centra horizontalmente */
-  display: flex; /* Para centrar el contenido del botón */
-  justify-content: center; /* Centra el contenido en el botón */
-  align-items: center; /* Centra el contenido verticalmente */
-  position: fixed; /* Fija el botón */
-  bottom: 20px; /* Espacio desde el fondo */
-  left: 50%; /* Alinea al centro horizontalmente */
-  transform: translateX(-50%); /* Ajusta para centrar el botón */
+  width: 100px;
+  height: 54px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 10px
 }
 
 .formulario{
