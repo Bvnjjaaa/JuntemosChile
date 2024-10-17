@@ -25,8 +25,20 @@
       </ion-item>
       
       
-      <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
+      <ion-button type="submit">Iniciar Sesión</ion-button>
+      <ion-button (click)="toggleFormulario()">Crear Usuario</ion-button>
     </form>
   </div>
-</ion-content>
 
+  <div class="overlay" *ngIf="mostrarFormulario">
+    <div class="formulario">
+      <ion-input [(ngModel)]="nuevoUsuario.usuario" placeholder="Usuario" required></ion-input>
+      <ion-input [(ngModel)]="nuevoUsuario.contrasena" type="password" placeholder="Contraseña" required>
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+      <ion-input [(ngModel)]="nuevoUsuario.correo" type="email" placeholder="Correo" required></ion-input>
+      <ion-button (click)="crearUsuarios()">Crear</ion-button>
+      <ion-button (click)="toggleFormulario()">Cancelar</ion-button>
+    </div>
+  </div>
+   

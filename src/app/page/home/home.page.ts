@@ -75,7 +75,7 @@ export class HomePage implements OnInit {
           this.nuevoReporte = {titulo: '',descripcion: '',ciudadano_id: '' };
           this.toggleFormulario();
           this.cargarReportes();
-          await this.presentToast("Reporte creado","success");
+          await this.presentToast("Reporte creado, espere respuesta del coordinador.","success");
         },
         (error) => console.error('Error al crear el reporte:', error)
       );
@@ -101,7 +101,7 @@ export class HomePage implements OnInit {
   cerrarSesion() {
     localStorage.removeItem('id');
     localStorage.removeItem('rol');
-    this.router.navigate(['/login']); // Redirigir a la página de inicio de sesión
+    this.router.navigate(['/login']);
   }
 
   buzonReportes(){

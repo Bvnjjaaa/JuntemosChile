@@ -27,14 +27,16 @@
     </ion-row>
   </ion-grid>
 
-  
+  <ion-button color="danger" class="boton-cuadrado" [ngClass]="{ 'hidden-button': rol !== 'Ciudadano' }" (click)="toggleFormulario()">Crear Reporte</ion-button> 
 
-  <div class="formulario" *ngIf="mostrarFormulario">
+  
+  <div class="overlay" *ngIf="mostrarFormulario">
+    <div class="formulario">
     <ion-input [(ngModel)]="nuevoReporte.titulo" placeholder="Título"></ion-input>
     <ion-input [(ngModel)]="nuevoReporte.descripcion" placeholder="Descripción"></ion-input>
     <ion-button color="danger" (click)="crearReportes()">Crear</ion-button>
     <ion-button color="danger" (click)="toggleFormulario()">Cancelar</ion-button>
+    </div>
   </div>
-
-  <ion-button color="danger" class="boton-cuadrado" [ngClass]="{ 'hidden-button': rol !== 'Ciudadano' }" (click)="toggleFormulario()">Crear Reporte</ion-button> 
+  
 </ion-content>
