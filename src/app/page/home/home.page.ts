@@ -39,6 +39,7 @@ export class HomePage implements OnInit {
     this.cargarReportes(); // Carga los reportes cada vez que la página se vuelve a mostrar
     this.rol = localStorage.getItem('rol');
   }
+  
   cargarReportes() {
     this.reportesService.obtenerReportes().subscribe(
       (response) => {
@@ -106,6 +107,10 @@ export class HomePage implements OnInit {
 
   buzonReportes(){
     this.router.navigate(["/solicitud-reportes"])
+  }
+
+  resumenReportes(){
+    this.router.navigate(["/resumen-reportes"])
   }
 }
 

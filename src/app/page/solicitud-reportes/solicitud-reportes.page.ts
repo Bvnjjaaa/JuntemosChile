@@ -1,4 +1,3 @@
-// solicitud-reportes.page.ts
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../api/reportes/reportes.service';
 import { Reportes } from '../../models/Reportes';

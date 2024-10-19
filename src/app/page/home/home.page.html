@@ -8,6 +8,8 @@
       <ion-icon name="mail-outline"></ion-icon>
     </ion-button>
   </div>
+
+  <ion-button class="boton-admin" color="danger" *ngIf="rol === 'Administrador'" (click)="resumenReportes()">Ver Resumen Reportes</ion-button>
   
   <ion-grid>
     <ion-row>

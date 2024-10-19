@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'solicitud-reportes',
     loadChildren: () => import('./page/solicitud-reportes/solicitud-reportes.module').then( m => m.SolicitudReportesPageModule)
   },
+  {
+    path: 'resumen-reportes',
+    loadChildren: () => import('./page/resumen-reportes/resumen-reportes.module').then( m => m.ResumenReportesPageModule)
+  },
 
 ];
 
