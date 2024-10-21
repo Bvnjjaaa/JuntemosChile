@@ -5,6 +5,7 @@ import { CrearReportes } from '../../models/CrearReportes';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
+import { InscribirService } from 'src/app/api/inscribirVoluntario/inscribir-voluntario.service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomePage implements OnInit {
   constructor(
     private reportesService: ReportesService,
     private toastController: ToastController,
+    private inscribirService: InscribirService,
     private router: Router
   ) {}
 
@@ -81,6 +83,42 @@ export class HomePage implements OnInit {
       console.warn('El título y la descripción son obligatorios.');
     }
   }
+
+  async inscribirVoluntario(id_reporte: number) {
+    // Recupera el ID del voluntario desde el almacenamiento local
+    const { value: id_voluntario } = await Preferences.get({ key: 'id' });
+
+    if (!id_voluntario) {
+        console.log("No se encuentra id de voluntario");
+        return;
+    }
+
+    // Primero verifica si el voluntario ya está inscrito en el reporte
+    this.inscribirService.verificarInscripcion(+id_reporte, +id_voluntario).subscribe(
+        async (verificacionResponse) => {
+            // Comprueba la longitud de la propiedad body
+            if (verificacionResponse.body.length > 0) {
+                await this.presentToast("Ya estás inscrito en este reporte", "warning");
+                return; // Salir de la función si ya está inscrito
+            }
+
+            // Si no está inscrito, proceder a inscribir al voluntario
+            this.inscribirService.inscribirVoluntario(+id_reporte, +id_voluntario).subscribe(
+                async (response) => {
+                    await this.presentToast("Te inscribiste al reporte", "success");
+                },
+                async (error) => {
+                    console.log('Hubo un error al inscribirte. Inténtalo de nuevo');
+                }
+            );
+        },
+        async (error) => {
+            console.log('Error al verificar la inscripción.');
+        }
+    );
+}
+
+
   
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;
@@ -108,5 +146,9 @@ export class HomePage implements OnInit {
 
   resumenReportes() {
     this.router.navigate(["/resumen-reportes"]);
+  }
+
+  reportesInscritos(){
+    this.router.navigate(["/reportes-inscritos"]);
   }
 }

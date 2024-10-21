@@ -44,7 +44,7 @@ export class LoginPage {
           const id = usuario.id;
           
           await Preferences.set({ key: 'id', value: id });
-          await Preferences.set({ key: 'rol', value: nombreRol }); // Almacenar el rol
+          await Preferences.set({ key: 'rol', value: nombreRol }); 
 
           this.router.navigate(['/home']);
           await this.presentToast('Iniciaste sesión correctamente', 'success');
