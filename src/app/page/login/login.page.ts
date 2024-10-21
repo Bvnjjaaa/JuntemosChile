@@ -4,6 +4,7 @@ import { LoginService } from '../../api/login/login.service';
 import { ToastController } from '@ionic/angular';
 import { CrearUsuario } from 'src/app/models/CrearUsuario';
 import { Usuarios } from 'src/app/models/Usuarios';
+import { Preferences } from '@capacitor/preferences'; 
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,10 @@ export class LoginPage {
   usuario: string = '';
   contrasena: string = '';
   usuarios: Usuarios[] = [];
-  mostrarFormulario: Boolean = false; 
+  mostrarFormulario: Boolean = false;
 
   nuevoUsuario: CrearUsuario = {
-    usuario: '',        
+    usuario: '',
     contrasena: '',
     correo: ''
   };
@@ -29,35 +30,32 @@ export class LoginPage {
   ) {}
 
   login() {
-    // Verificar si los campos usuario y contraseña están completos
+    //Verifica si los campos estan completos
     if (!this.usuario.trim() || !this.contrasena.trim()) {
       this.presentToast('Usuario y contraseña son obligatorios', 'danger');
-      return; // Salir de la función si los campos son obligatorios
+      return;
     }
   
     this.loginService.validateUser(this.usuario, this.contrasena).subscribe(
       async (response) => {
         if (response.body && response.body.length > 0) {
           const usuario = response.body[0];
-          console.log('Inicio de sesión exitoso', usuario);
           const nombreRol = usuario.roles.nombre;
           const id = usuario.id;
-          localStorage.setItem('id', id);
-          localStorage.setItem('rol', nombreRol); // Almacenar el rol
-          // Redirigir al dashboard o a la página principal
-          this.router.navigate(['/home']);
-          console.log('Rol del usuario:', nombreRol); // Imprimir el rol
           
-          // Limpiar los campos después del inicio de sesión exitoso
+          await Preferences.set({ key: 'id', value: id });
+          await Preferences.set({ key: 'rol', value: nombreRol }); // Almacenar el rol
+
+          this.router.navigate(['/home']);
+          await this.presentToast('Iniciaste sesión correctamente', 'success');
+          
           this.usuario = '';
           this.contrasena = '';
-          await this.presentToast('Iniciaste sesión correctamente', 'success');
         } else {
           await this.presentToast('Usuario o contraseña incorrectos', 'danger');
         }
       },
       async (error) => {
-        console.error('Error al iniciar sesión:', error);
         await this.presentToast('Hubo un problema al iniciar sesión. Inténtalo de nuevo.', 'danger');
       }
     );
@@ -105,11 +103,7 @@ export class LoginPage {
       }
     );
   }
-  
-  
-  
-  
-  
+
   async presentToast(message: string, color: string = 'danger') {
     const toast = await this.toastController.create({
       message: message,
@@ -123,7 +117,5 @@ export class LoginPage {
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;
     this.nuevoUsuario = { usuario: '', contrasena: '', correo: ''};
-   
   }
 }
-
