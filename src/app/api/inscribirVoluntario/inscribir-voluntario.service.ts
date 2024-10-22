@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class InscribirService {
 
-  private endpoint = 'reportes_inscritos'; // Nombre de la tabla en Supabase
+  private endpoint = 'reportes_inscritos'; 
 
   constructor(private apiService: ApiConfigService) {}
 
@@ -22,5 +22,16 @@ export class InscribirService {
     const path = `${this.endpoint}?id_reporte=eq.${id_reporte}&id_voluntario=eq.${id_voluntario}&select=*`;
     return this.apiService.get<any>(path);
  }
+
+ obtenerReportesInscritosConDetalles(id_voluntario: number): Observable<HttpResponse<any>> {
+  const path = `reportes_inscritos?select=*,reportes(*)&id_voluntario=eq.${id_voluntario}`;
+  return this.apiService.get<any>(path);
+}
+
+desinscribirVoluntario(id_reporte: number, id_voluntario: number): Observable<HttpResponse<any>> {
+  const path = `${this.endpoint}?id_reporte=eq.${id_reporte}&id_voluntario=eq.${id_voluntario}`;
+  return this.apiService.delete(path);
+}
+
 
 }

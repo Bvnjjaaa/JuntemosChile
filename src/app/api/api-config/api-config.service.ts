@@ -39,9 +39,13 @@ export class ApiConfigService {
   }
 
   // Método PATCH genérico
-  // api-config.service.ts
   patch<T>(url: string, body: any): Observable<HttpResponse<T>> {
     return this.http.patch<T>(`${this.baseUrl}/${url}`, body, { headers: this.getHeaders(), observe: 'response' })
+      .pipe(catchError(this.handleError));
+  }
+
+  delete<T>(path: string): Observable<HttpResponse<T>> {
+    return this.http.delete<T>(`${this.baseUrl}/${path}`, { headers: this.getHeaders(), observe: 'response' })
       .pipe(catchError(this.handleError));
   }
 

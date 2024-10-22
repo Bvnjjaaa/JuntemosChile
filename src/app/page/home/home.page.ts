@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
 import { InscribirService } from 'src/app/api/inscribirVoluntario/inscribir-voluntario.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -76,6 +77,7 @@ export class HomePage implements OnInit {
           this.toggleFormulario();
           await this.cargarReportes();
           await this.presentToast("Reporte creado, espere respuesta del coordinador.", "success");
+          console.log("body",response.status);
         },
         (error) => console.error('Error al crear el reporte:', error)
       );

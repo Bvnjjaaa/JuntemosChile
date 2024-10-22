@@ -23,7 +23,7 @@
             <p>Creado el: {{ reporte.creado_en }}</p>
             <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
             <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
-            <ion-button color="danger" (click)="inscribirVoluntario(reporte.id_reporte)">Inscribirse a reporte</ion-button>
+            <ion-button color="danger" *ngIf="rol === 'Voluntario'" (click)="inscribirVoluntario(reporte.id_reporte)">Inscribirse a reporte</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

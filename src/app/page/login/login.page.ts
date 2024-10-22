@@ -42,15 +42,13 @@ export class LoginPage {
           const usuario = response.body[0];
           const nombreRol = usuario.roles.nombre;
           const id = usuario.id;
-          
           await Preferences.set({ key: 'id', value: id });
-          await Preferences.set({ key: 'rol', value: nombreRol }); 
-
+          await Preferences.set({ key: 'rol', value: nombreRol });
           this.router.navigate(['/home']);
           await this.presentToast('Iniciaste sesión correctamente', 'success');
-          
           this.usuario = '';
           this.contrasena = '';
+          console.log("Body:",response.body);
         } else {
           await this.presentToast('Usuario o contraseña incorrectos', 'danger');
         }
