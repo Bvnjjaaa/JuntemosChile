@@ -12,11 +12,13 @@ export class ResumenReportesPage implements OnInit {
   reportesAceptados: Reportes[] = [];
   reportesPendientes: Reportes[] = [];
   reportesRechazados: Reportes[] = [];
+ 
 
 
   constructor(
     private reportesService: ReportesService,
     private router: Router
+    
   ) {}
 
   ngOnInit() {

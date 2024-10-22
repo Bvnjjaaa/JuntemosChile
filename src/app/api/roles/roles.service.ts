@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { ApiConfigService } from '../api-config/api-config.service';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { Roles } from '../../models/Roles'; // Asegúrate de tener este modelo
+import { Roles } from '../../models/Roles';
+import { Usuarios } from 'src/app/models/Usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class RolesService {
   // Método para obtener todos los roles
   obtenerRoles(): Observable<HttpResponse<Roles[]>> {
     return this.apiConfigService.get<Roles[]>(this.endpoint);
+  }
+
+  actualizarRol(id_usuario: number, rol_id: number): Observable<HttpResponse<Usuarios>> {
+    const url = `${this.endpoint}?id_usuario=eq.${id_usuario}`;
+    return this.apiConfigService.patch(url, { rol_id });
   }
 }
 

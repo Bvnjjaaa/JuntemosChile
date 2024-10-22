@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'reportes-inscritos',
     loadChildren: () => import('./page/reportes-inscritos/reportes-inscritos.module').then( m => m.ReportesInscritosPageModule)
   },
+  {
+    path: 'cambiar-rol',
+    loadChildren: () => import('./page/cambiar-rol/cambiar-rol.module').then( m => m.CambiarRolPageModule)
+  },
 
 ];
 
