@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="title-container">
+    <ion-button color="danger" (click)="volver()" class="volver-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="app-title">JuntemosChile</h1>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="usuarios.length === 0" size="12">
+        <p class="h2">no hay usuarios en este momento.</p>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let usuario of usuarios">
+        <ion-card class="form">
+          <ion-card-header>
+            <ion-card-title>Usuario: {{ usuario.usuario }}</ion-card-title>
+          </ion-card-header>
+          <ion-select [(ngModel)]="nuevoRol" placeholder="Selecciona nuevo rol">
+            <ion-select-option value="1">Administrador</ion-select-option>
+            <ion-select-option value="2">Coordinador</ion-select-option>
+            <ion-select-option value="3">Ciudadano</ion-select-option>
+            <ion-select-option value="4">Voluntario</ion-select-option>
+          </ion-select>
+          <ion-card-content>
+            <p>rol: {{ usuario.id_rol }}</p>
+            <p>correo: {{ usuario.correo }}</p>
+            <ion-button (click)="cambiarRol(usuario.usuario)">Cambiar Rol</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

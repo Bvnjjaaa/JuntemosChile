@@ -19,5 +19,5 @@ export class RolesService {
   obtenerRoles(): Observable<HttpResponse<Roles[]>> {
     return this.apiConfigService.get<Roles[]>(this.endpoint);
   }
-  // Otros métodos para actualizar y eliminar roles pueden ir aquí
 }
+

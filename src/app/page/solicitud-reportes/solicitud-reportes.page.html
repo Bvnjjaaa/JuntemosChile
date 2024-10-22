@@ -1,0 +1,31 @@
+<ion-content>
+  <div class="title-container">
+    <ion-button color="danger" (click)="volver()" class="volver-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="app-title">JuntemosChile</h1>
+  </div>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let reporte of reportesPendientes">
+        <ion-card class="form">
+          <ion-card-header>
+            <ion-card-title>{{ reporte.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ reporte.descripcion }}</p>
+            <p>Creado el: {{ reporte.creado_en }}</p>
+            <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
+            <ion-button color="danger" (click)="aceptarReporte(reporte.id_reporte)">Aceptar</ion-button>
+            <ion-button color="danger" (click)="rechazarReporte(reporte.id_reporte)">Rechazar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+
+  

@@ -1,30 +1,35 @@
 ion-content {
-  --background: blue; /* Color de fondo claro */
+  --background: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 20px; /* Añadir espacio inferior para el botón */
+  min-height: 100vh; /* Para que el contenido ocupe toda la pantalla */
 }
 
 .title-container {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: space-between; /* Espacio entre el título y el botón */
+  align-items: center; /* Centra verticalmente */
+  padding: 20px; /* Añade espacio alrededor del contenedor */
 }
 
 .app-title {
   font-size: 32px;
   font-weight: bold;
-  color: white; /* Color azul como en el login */
+  color: rgb(255, 255, 255); /* Color azul como en el login */
   text-align: center;
   margin-bottom: 20px;
+  margin-left: 2;
 }
 
 /* Estilos para las tarjetas de reportes */
 ion-card {
-  --background: white;
+  --background: rgb(255, 255, 255);
   --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
 }
 
-ion-card-header {
-  --color: #d52b1e; /* Título del reporte en rojo */
-}
 
 ion-card-title {
   color: #d52b1e; /* Color rojo para el nombre del usuario */
@@ -34,3 +39,63 @@ ion-card-content p {
   font-size: 16px;
   color: black; /* Texto de los detalles del reporte en azul */
 }
+
+/* Estilo para el botón cuadrado centrado */
+.boton-cuadrado {
+  width: 100px;
+  height: 54px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 10px
+}
+
+.formulario{
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 5%;
+  border-radius: 6px;
+  padding: 18px;
+}
+
+.formulario ion-input{
+  color: black;
+}
+
+.red-button {
+  background-color: #d52b1e; /* Rojo */
+  color: white; /* Texto en blanco */
+}
+
+.bandeja-button {
+  height: 40px; /* Ajusta la altura del botón para que sea cuadrado */
+  border-radius: 8px; /* Opcional: esquinas redondeadas */
+  display: flex;
+  justify-content: center; /* Centra el ícono horizontalmente */
+  align-items: center; /* Centra el ícono verticalmente */
+}
+
+.hidden-button {
+  visibility: hidden;
+}
+
+.overlay {
+  position: fixed; /* Ocupa toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex; /* Usar flexbox para centrar el contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+.boton-admin{
+  margin-left: 22%;
+}
+
+

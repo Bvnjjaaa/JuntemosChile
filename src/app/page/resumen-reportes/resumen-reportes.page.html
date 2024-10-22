@@ -1,0 +1,74 @@
+<ion-content>
+  <div class="title-container">
+    <ion-button color="danger" (click)="volver()" class="volver-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="app-title">JuntemosChile</h1>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <h2>Aceptados</h2>
+      <ion-col *ngIf="reportesAceptados.length === 0" size="12">
+        <p class="h2">No hay reportes aceptados en este momento.</p>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let reporte of reportesAceptados">
+        <ion-card class="form">
+          <ion-card-header>
+            <ion-card-title>{{ reporte.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ reporte.descripcion }}</p>
+            <p>Creado el: {{ reporte.creado_en }}</p>
+            <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
+            <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <h2>Pendientes</h2>
+      <ion-col *ngIf="reportesPendientes.length === 0" size="12">
+        <p class="h2">No hay reportes pendientes en este momento.</p>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let reporte of reportesPendientes">
+        <ion-card class="form">
+          <ion-card-header>
+            <ion-card-title>{{ reporte.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ reporte.descripcion }}</p>
+            <p>Creado el: {{ reporte.creado_en }}</p>
+            <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
+            <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <h2>Rechazados</h2>
+      <ion-col *ngIf="reportesRechazados.length === 0" size="12">
+        <p class="h2">No hay reportes rechazados en este momento.</p>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let reporte of reportesRechazados">
+        <ion-card class="form">
+          <ion-card-header>
+            <ion-card-title>{{ reporte.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ reporte.descripcion }}</p>
+            <p>Creado el: {{ reporte.creado_en }}</p>
+            <p>Ciudadano ID: {{ reporte.ciudadano_id }}</p>
+            <p>Coordinador ID: {{ reporte.coordinador_id }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

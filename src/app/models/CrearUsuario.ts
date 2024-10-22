@@ -1,5 +1,6 @@
-export interface CrearUsuario{
-    usuario: string;        // Nombre de usuario
-    contrasena: string;     // Contraseña del usuario
-    correo: string;         // Correo del usuario
-  }
+export interface CrearUsuario {
+  usuario: string;
+  contrasena: string;
+  correo: string;
+  rol_id?: number;
+}

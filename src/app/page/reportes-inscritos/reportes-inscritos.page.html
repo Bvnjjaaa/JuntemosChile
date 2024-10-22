@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="title-container">
+    <ion-button color="danger" (click)="volver()" class="volver-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="app-title">JuntemosChile</h1>
+  </div>
+
+
+    <ion-grid>
+      <ion-row>
+        <h2>Reportes Inscritos</h2>
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let inscripcion of reportesInscritos">
+          <ion-card class="form">
+            <ion-card-header>
+              <ion-card-title>{{ inscripcion.reportes.titulo }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{ inscripcion.reportes.descripcion }}</p>
+              <p>Fecha de Inscripción {{ inscripcion.fecha_inscripcion }}</p>
+              <ion-button (click)="desinscribirVoluntario(inscripcion.id_reporte)" color="danger">Desinscribirse</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
