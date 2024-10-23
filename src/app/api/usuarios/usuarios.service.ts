@@ -11,10 +11,16 @@ export class UsuariosService {
 
   private readonly endpoint = 'usuarios'; // Nombre de la tabla en Supabase
 
-  constructor(private apiConfigService: ApiConfigService) { }
+  constructor(private apiService: ApiConfigService) { }
   
   obtenerUsuarios(): Observable<HttpResponse<Usuarios[]>> {
-    return this.apiConfigService.get<Usuarios[]>(this.endpoint);
+    const path = `${this.endpoint}?select=*,roles(nombre)`; 
+    return this.apiService.get<Usuarios[]>(path);
+  }
+
+  actualizarRol(id: number, rol_id: number): Observable<HttpResponse<Usuarios>> {
+    const url = `${this.endpoint}?id=eq.${id}`;
+    return this.apiService.patch(url, { rol_id });
   }
 
 }

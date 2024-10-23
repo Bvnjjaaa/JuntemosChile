@@ -20,10 +20,5 @@ export class RolesService {
   obtenerRoles(): Observable<HttpResponse<Roles[]>> {
     return this.apiConfigService.get<Roles[]>(this.endpoint);
   }
-
-  actualizarRol(id_usuario: number, rol_id: number): Observable<HttpResponse<Usuarios>> {
-    const url = `${this.endpoint}?id_usuario=eq.${id_usuario}`;
-    return this.apiConfigService.patch(url, { rol_id });
-  }
 }
 

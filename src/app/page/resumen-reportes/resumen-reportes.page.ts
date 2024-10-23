@@ -70,4 +70,8 @@ export class ResumenReportesPage implements OnInit {
     this.router.navigate(["/home"]);
   }
 
+  cambiarRoles(){
+    this.router.navigate(["/cambiar-rol"]);
+  }
+
 }

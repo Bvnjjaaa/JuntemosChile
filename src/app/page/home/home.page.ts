@@ -153,4 +153,6 @@ export class HomePage implements OnInit {
   reportesInscritos(){
     this.router.navigate(["/reportes-inscritos"]);
   }
+
+  
 }

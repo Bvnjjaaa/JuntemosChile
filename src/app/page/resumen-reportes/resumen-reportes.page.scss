@@ -50,6 +50,18 @@ ion-content {
     align-items: center; /* Centra el ícono verticalmente */
     margin-right: 16px; /* Espacio entre el botón y el título */
   }
+
+  .settings-button {
+    width: 50px; /* Ajusta el ancho del botón */
+    height: 40px; /* Ajusta la altura del botón para que sea cuadrado */
+    border-radius: 8px; /* Opcional: esquinas redondeadas */
+    background-color: red; /* Color rojo para el botón */
+    color: white; /* Color del ícono */
+    display: flex;
+    justify-content: center; /* Centra el ícono horizontalmente */
+    align-items: center; /* Centra el ícono verticalmente */
+    margin-left: 21px; /* Espacio entre el botón y el título */
+  }
   
   h2{
     font-weight: bold;

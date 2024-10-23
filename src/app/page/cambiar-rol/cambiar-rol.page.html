@@ -6,14 +6,46 @@
     <h1 class="app-title">JuntemosChile</h1>
   </div>
 
-  <ion-item>
-    <ion-label>Selecciona nuevo rol</ion-label>
-    <ion-select [(ngModel)]="nuevo_rol_id">
-      <ion-select-option value="1">Administrador</ion-select-option>
-      <ion-select-option value="2">Coordinador</ion-select-option>
-      <ion-select-option value="3">Voluntario</ion-select-option>
-      <ion-select-option value="4">Ciudadano</ion-select-option>
-    </ion-select>
-  </ion-item>
   
-  <ion-button (click)="cambiarRol(id_usuario, nuevo_rol_id)">Cambiar Rol</ion-button>
+  
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let usuario of usuarios">
+          <ion-card class="form">
+            <ion-card-header>
+              <ion-card-title>{{ usuario.usuario }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{ usuario.rolNombre }}</p>
+              <p>{{ usuario.correo}}</p>
+              <ion-button (click)="toggleFormulario(usuario)">Cambiar Rol</ion-button>
+              <!-- Muestra el ion-select directamente al presionar el botón -->
+              <div *ngIf="usuarioSeleccionado === usuario">
+                <ion-item>
+                  <ion-select [(ngModel)]="usuario.rol_id">
+                    <ion-select-option value="1">Administrador</ion-select-option>
+                    <ion-select-option value="2">Coordinador</ion-select-option>
+                    <ion-select-option value="3">Ciudadano</ion-select-option>
+                    <ion-select-option value="4">Voluntario</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-button (click)="cambiarRol(usuario.id, usuario.rol_id)">Actualizar Rol</ion-button>
+                <ion-button (click)="toggleFormulario(usuario)">Cancelar</ion-button>
+              </div>
+  
+          
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
+  
+  
+
+  
+
+
+
